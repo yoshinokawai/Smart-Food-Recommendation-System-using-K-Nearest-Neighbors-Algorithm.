@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col text-center">
+        <h2 class="fw-bold text-success">🎉 Món Ăn Phù Hợp Dành Cho Bạn</h2>
+        <p class="text-muted">Gợi ý được trích xuất bằng thuật toán KNN và Cosine Similarity</p>
+    </div>
+</div>
+
+<div class="row">
+    {% for item in results %}
+    <div class="col-md-4 mb-4">
+        <!-- Áp dụng hiệu ứng nổi bật cho món số 1 -->
+        <div class="card h-100 shadow-sm {% if loop.first %}border-success{% endif %}">
+            
+            {% if loop.first %}
+            <div class="card-header bg-success text-white text-center fw-bold">
+                🏆 Gợi ý Tốt nhất
+            </div>
+            {% endif %}
+            
+            <div class="card-body text-center pt-4">
+                <h3 class="card-title text-primary fw-bold">{{ item.food_name }}</h3>
+                <span class="badge bg-secondary mb-3">{{ item.type }}</span>
+                
+                <h1 class="display-4 text-success fw-bold">{{ item.match_percent }}%</h1>
+                <p class="text-muted mb-0 fw-semibold">Mức độ phù hợp</p>
+            </div>
+            
+            <div class="card-footer bg-light text-center">
+                <small class="text-muted">Độ lệch Cosine Similarity: {{ item.distance }}</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="row mt-4 mb-5 text-center">
+    <div class="col">
+        <a href="/survey" class="btn btn-outline-secondary me-2">Khảo sát lại</a>
+        <a href="/" class="btn btn-primary">Quay về Trang chủ</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center text-center mt-5">
+    <div class="col-md-8">
+        <h1 class="mb-4 text-primary fw-bold">Hệ Thống Gợi Ý Món Ăn Thông Minh</h1>
+        <p class="lead text-muted">Hệ thống áp dụng thuật toán Học Máy (K-Nearest Neighbors) để phân tích sở thích và tìm kiếm món ăn tương đồng nhất dành riêng cho bạn.</p>
+        
+        <!-- Bảng hiển thị Đánh giá mô hình -->
+        <div class="card my-5 shadow-sm border-info mx-auto" style="max-width: 500px;">
+            <div class="card-body bg-light">
+                <h5 class="card-title text-info mb-3">📊 Chỉ số Đánh giá Cụm Dữ liệu</h5>
+                <ul class="list-unstyled text-start px-3 mb-0">
+                    <li class="mb-2">🔹 <strong>K tối ưu (KMeans):</strong> {{ optimal_k }} cụm</li>
+                    <li>🔹 <strong>Silhouette Score:</strong> <span class="badge bg-success fs-6">{{ silhouette_score }}</span> 
+                        <br><small class="text-muted ms-3">(Giá trị tiệm cận 1 cho thấy dữ liệu được phân lớp tốt)</small>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Nút Call-to-action đi tới trang Cold Start -->
+        <a href="/survey" class="btn btn-primary btn-lg px-5 py-3 shadow">
+            Khảo sát Sở thích (Cold Start) 🚀
+        </a>
+    </div>
+</div>
+{% endblock %}
