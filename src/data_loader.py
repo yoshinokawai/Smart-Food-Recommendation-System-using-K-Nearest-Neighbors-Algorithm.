@@ -18,14 +18,15 @@ class DataLoader:
         - region_code: 1 (Miền Bắc), 2 (Miền Trung), 3 (Miền Nam), 0 (Quốc tế)
         """
         data = {
-            'food_id': range(1, 11),
+            'food_id': range(1, 16),
             'food_name': ['Phở bò', 'Bún chả', 'Salad chay', 'Canh chua', 'Chè trôi nước', 
-                          'Gà rán', 'Lẩu thái cay', 'Đậu hũ tứ xuyên', 'Bánh xèo', 'Gỏi cuốn chay'],
-            'is_spicy': [0, 0, 0, 1, 0, 0, 1, 1, 0, 0],
-            'is_vegan': [0, 0, 1, 0, 1, 0, 0, 1, 0, 1],
-            'is_sweet': [0, 1, 0, 1, 1, 0, 0, 0, 0, 0],
-            'price_range': [2, 2, 1, 2, 1, 3, 3, 2, 2, 1], 
-            'region_code': [1, 1, 0, 3, 1, 0, 0, 0, 3, 3]  
+                          'Gà rán', 'Lẩu thái cay', 'Đậu hũ tứ xuyên', 'Bánh xèo', 'Gỏi cuốn chay',
+                          'Trà sữa trân châu', 'Nước mía', 'Cà phê đen đá', 'Sinh tố bơ', 'Trà đào cam sả'],
+            'is_spicy': [0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            'is_vegan': [0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1],
+            'is_sweet': [0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1],
+            'price_range': [2, 2, 1, 2, 1, 3, 3, 2, 2, 1, 2, 1, 1, 2, 2], 
+            'region_code': [1, 1, 0, 3, 1, 0, 0, 0, 3, 3, 0, 3, 0, 0, 0]  
         }
         df = pd.DataFrame(data)
         return df
