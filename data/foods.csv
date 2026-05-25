@@ -1,0 +1,41 @@
+food_id,food_name,is_spicy,is_vegan,is_sweet,price_range,region_code
+1,Phở bò,0,0,0,2,1
+2,Bún chả,0,0,1,2,1
+3,Salad chay,0,1,0,1,0
+4,Canh chua,1,0,1,2,3
+5,Chè trôi nước,0,1,1,1,1
+6,Gà rán,0,0,0,3,0
+7,Lẩu thái cay,1,0,0,3,0
+8,Đậu hũ tứ xuyên,1,1,0,2,0
+9,Bánh xèo,0,0,0,2,3
+10,Gỏi cuốn chay,0,1,0,1,3
+11,Trà sữa trân châu,0,1,1,2,0
+12,Nước mía,0,1,1,1,3
+13,Cà phê đen đá,0,1,0,1,0
+14,Sinh tố bơ,0,1,1,2,0
+15,Trà đào cam sả,0,1,1,2,0
+16,Bún bò Huế,1,0,0,2,2
+17,Pizza chay,0,1,0,3,0
+18,Mì Ý bò bằm,0,0,0,3,0
+19,Sushi tổng hợp,0,0,0,3,0
+20,Bánh mì pate,0,0,0,1,3
+21,Kem vani,0,1,1,2,0
+22,Nem rán,0,0,0,2,1
+23,Bánh canh ruộng,1,0,0,1,2
+24,Cơm chiên dương châu,0,0,0,2,0
+25,Mướp đắng nhồi thịt,0,0,0,2,3
+26,Rau muống xào tỏi,0,1,0,1,1
+27,Đậu sốt cà chua,0,1,0,1,1
+28,Súp ngô chay,0,1,0,1,0
+29,Lẩu riêu cua,0,0,0,3,1
+30,Bún riêu cua,0,0,0,2,1
+31,Cá kho tộ,0,0,1,2,3
+32,Thịt kho tàu,0,0,1,2,3
+33,Canh măng móng giò,0,0,0,3,1
+34,Nem cuốn tôm thịt,0,0,0,2,3
+35,Cháo lòng,0,0,0,1,1
+36,Chè thái,0,1,1,2,0
+37,Sữa chua nếp cẩm,0,1,1,1,1
+38,Khoai tây chiên,0,1,0,1,0
+39,Gà xào sả ớt,1,0,0,2,3
+40,Thịt bò né,0,0,0,3,3

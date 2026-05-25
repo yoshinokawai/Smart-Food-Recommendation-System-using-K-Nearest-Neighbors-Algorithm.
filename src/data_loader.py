@@ -1,22 +1,29 @@
+import os
 import pandas as pd
 
 class DataLoader:
     """
     Lớp tải và quản lý dữ liệu cho hệ thống.
     """
-    def __init__(self):
-        pass
+    def __init__(self, data_path=None):
+        if data_path is None:
+            # Tìm đường dẫn tuyệt đối đến data/foods.csv
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            self.data_path = os.path.join(base_dir, 'data', 'foods.csv')
+        else:
+            self.data_path = data_path
 
     def generate_dummy_data(self):
         """
-        Tạo dữ liệu giả lập (Dummy Data) dạng DataFrame gồm thông tin các món ăn.
-        Các đặc trưng bao gồm:
-        - is_spicy: 1 (Cay), 0 (Không cay)
-        - is_vegan: 1 (Chay), 0 (Mặn)
-        - is_sweet: 1 (Ngọt), 0 (Không ngọt)
-        - price_range: 1 (Rẻ), 2 (Vừa), 3 (Đắt)
-        - region_code: 1 (Miền Bắc), 2 (Miền Trung), 3 (Miền Nam), 0 (Quốc tế)
+        Tải dữ liệu từ file CSV. Nếu không tồn tại, trả về dữ liệu giả lập.
         """
+        if os.path.exists(self.data_path):
+            try:
+                df = pd.read_csv(self.data_path)
+                return df
+            except Exception as e:
+                print(f"Lỗi khi đọc file CSV: {e}. Đang chuyển sang dùng dữ liệu mặc định.")
+
         data = {
             'food_id': range(1, 16),
             'food_name': ['Phở bò', 'Bún chả', 'Salad chay', 'Canh chua', 'Chè trôi nước', 

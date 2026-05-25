@@ -15,34 +15,57 @@ from src.evaluator import ModelEvaluator
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 
+import pickle
+import json
+
 app = Flask(__name__)
 
-# Khởi tạo mô hình (Tải 1 lần khi server chạy)
+# Đảm bảo các mô hình đã được huấn luyện
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+models_dir = os.path.join(base_dir, 'models')
+knn_path = os.path.join(models_dir, 'knn_model.pkl')
+metrics_path = os.path.join(models_dir, 'metrics.json')
+
+if not os.path.exists(knn_path) or not os.path.exists(metrics_path):
+    print("[*] Không tìm thấy file mô hình hoặc file chỉ số. Đang tự động huấn luyện...")
+    try:
+        from src.train import train_models
+        train_models()
+    except Exception as e:
+        print(f"Lỗi khi tự động huấn luyện mô hình: {e}")
+
+# Tải dữ liệu và mô hình đã lưu
 loader = DataLoader()
 df_foods = loader.generate_dummy_data()
 
 preprocessor = DataPreprocessor()
-feature_matrix = preprocessor.get_feature_matrix(df_foods)
 
-# Tìm K tối ưu và Silhouette score để hiển thị lên UI
-evaluator = ModelEvaluator()
-optimal_k = evaluator.evaluate_clusters(feature_matrix, max_k=5)
+# Tải mô hình KNN Recommender từ file
+try:
+    with open(knn_path, 'rb') as f:
+        recommender = pickle.load(f)
+except Exception as e:
+    print(f"Lỗi khi tải mô hình KNN: {e}")
+    recommender = SmartFoodRecommender(n_neighbors=3)
+    feature_matrix = preprocessor.get_feature_matrix(df_foods)
+    recommender.fit(df_foods, feature_matrix)
 
-kmeans = KMeans(n_clusters=optimal_k, random_state=42, n_init=10)
-cluster_labels = kmeans.fit_predict(feature_matrix)
-best_score = silhouette_score(feature_matrix, cluster_labels)
-
-# Huấn luyện mô hình KNN
-recommender = SmartFoodRecommender(n_neighbors=3)
-recommender.fit(df_foods, feature_matrix)
+# Tải các chỉ số đánh giá từ file JSON
+metrics = {}
+try:
+    with open(metrics_path, 'r', encoding='utf-8') as f:
+        metrics = json.load(f)
+except Exception as e:
+    print(f"Lỗi khi tải metrics: {e}")
 
 @app.route('/')
 def index():
     """Trang chủ hiển thị thông tin và chỉ số đánh giá."""
+    foods_list = df_foods.to_dict(orient='records')
     return render_template(
         'index.html', 
-        optimal_k=optimal_k, 
-        silhouette_score=round(best_score, 4)
+        metrics=metrics,
+        foods=foods_list
     )
 
 @app.route('/survey', methods=['GET', 'POST'])
