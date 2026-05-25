@@ -1,45 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row mb-4">
+<div class="row mb-5">
     <div class="col text-center">
-        <h2 class="fw-bold text-success">🎉 Món Ăn Phù Hợp Dành Cho Bạn</h2>
-        <p class="text-muted">Gợi ý được trích xuất bằng thuật toán KNN và Cosine Similarity</p>
+        <h1 class="fw-bold text-gradient-primary">🎉 Món Ăn Phù Hợp Dành Cho Bạn</h1>
+        <p class="text-muted">Gợi ý được trích xuất bằng thuật toán Học Máy KNN kết hợp độ đo Cosine Similarity</p>
     </div>
 </div>
 
-<div class="row">
+<div class="row justify-content-center">
     {% for item in results %}
     <div class="col-md-4 mb-4">
-        <!-- Áp dụng hiệu ứng nổi bật cho món số 1 -->
-        <div class="card h-100 shadow-sm {% if loop.first %}border-success{% endif %}">
+        <!-- Áp dụng hiệu ứng nổi bật và hiệu ứng bay bổng (float) cho món số 1 -->
+        <div class="card h-100 card-premium {% if loop.first %}card-premium-accent animate-float{% endif %}">
             
             {% if loop.first %}
-            <div class="card-header bg-success text-white text-center fw-bold">
-                🏆 Gợi ý Tốt nhất
+            <div class="card-header card-header-premium text-center fw-bold text-gradient-primary" style="font-size: 1.1rem;">
+                🏆 Gợi Ý Tốt Nhất
             </div>
             {% endif %}
             
-            <div class="card-body text-center pt-4">
-                <h3 class="card-title text-primary fw-bold">{{ item.food_name }}</h3>
-                <span class="badge bg-secondary mb-3">{{ item.type }}</span>
+            <div class="card-body text-center pt-5 pb-5">
+                <h2 class="card-title fw-bold text-white mb-2">{{ item.food_name }}</h2>
+                <span class="badge {% if item.type == 'Món Chay' %}badge-premium-vegan{% else %}badge bg-secondary bg-opacity-20 text-secondary border border-secondary border-opacity-20 px-3 py-2 rounded-pill fw-semibold small{% endif %} mb-4">{{ item.type }}</span>
                 
-                <h1 class="display-4 text-success fw-bold">{{ item.match_percent }}%</h1>
-                <p class="text-muted mb-0 fw-semibold">Mức độ phù hợp</p>
+                <h1 class="display-3 fw-bold {% if loop.first %}text-success{% else %}text-primary{% endif %} mb-2">{{ item.match_percent }}%</h1>
+                <p class="text-muted mb-0 fw-semibold">Mức độ tương thích</p>
             </div>
             
-            <div class="card-footer bg-light text-center">
-                <small class="text-muted">Độ lệch Cosine Similarity: {{ item.distance }}</small>
+            <div class="card-footer bg-black bg-opacity-10 border-top border-secondary border-opacity-10 text-center py-3">
+                <code class="text-muted" style="font-size: 0.8rem;">Cosine Distance: {{ item.distance }}</code>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
 
-<div class="row mt-4 mb-5 text-center">
+<div class="row mt-5 mb-5 text-center">
     <div class="col">
-        <a href="/survey" class="btn btn-outline-secondary me-2">Khảo sát lại</a>
-        <a href="/" class="btn btn-primary">Quay về Trang chủ</a>
+        <a href="/survey" class="btn btn-premium btn-premium-outline me-3">Khảo sát lại</a>
+        <a href="/" class="btn btn-premium btn-premium-primary">Quay về Trang chủ</a>
     </div>
 </div>
 {% endblock %}
